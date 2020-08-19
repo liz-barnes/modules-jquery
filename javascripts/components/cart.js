@@ -1,7 +1,8 @@
 import { setCart, getCart, emptyCart } from './../helpers/data/cartData.js';
 
+
 const makeCart = () => {
-    $("#cart").html(` 
+  $("#cart").html(` 
       <div class="modal fade" id="buy-modal" tabindex="-1" role="dialog" aria-labelledby="buy-modalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -44,69 +45,69 @@ const makeCart = () => {
             <div>$${cartTotal().toFixed(2)}</div>
           </div>
             <button class="btn btn-danger" data-toggle="modal" data-target="#buy-modal" id="checkout">Checkout</button>
-        </div>`
-      );
-      $('#charge-it').click(() => {
-        const ccNum = $('#credit-card').val();
-        chargeIt(ccNum);
-      })
-  
-      showCartItems();
-  }
-  
-  const addToCart = (array, index) => {
-    const cartButton = $(`#cart-add-${index}`);
-  
-    cartButton.on('click', () => {
-      setCart(array[index]);
-      makeCart();
-    })
-  }
-  
-  const showCartItems = () => {
-  
-    let obj = {};
-  
-    getCart().forEach((item) => {
-      if (item.title in obj) {
-        obj[item.title].quantity++;
-        obj[item.title].price += item.price;
-      } else {
-        obj[item.title] = { quantity: 1, price: item.price }
-      }
-    });
-  
-    Object.keys(obj).map((title) => {
-      $("tbody").append(
-        `<tr>
+        </div>`);
+  $("#charge-it").click(() => {
+    const ccNum = $("#credit-card").val();
+    chargeIt(ccNum);
+  });
+
+  showCartItems();
+};
+
+const addToCart = (array, index) => {
+  const cartButton = $(`#cart-add-${index}`);
+
+  cartButton.on("click", () => {
+    setCart(array[index]);
+    makeCart();
+  });
+};
+
+const showCartItems = () => {
+  let obj = {};
+
+  getCart().forEach((item) => {
+    if (item.title in obj) {
+      obj[item.title].quantity++;
+      obj[item.title].price += item.price;
+    } else {
+      obj[item.title] = { quantity: 1, price: item.price };
+    }
+  });
+
+  Object.keys(obj).map((title) => {
+    $("tbody").append(
+      `<tr>
           <td>${title}</td>
           <td>${obj[title].quantity}</td>
           <td>$${obj[title].price.toFixed(2)}</td>
         </tr>`
-      )
-    })
-  }
-  
-  const cartTotal = () => {
-    const myCart = getCart();
-    const total = myCart.reduce((a, cartItem) => {return a + cartItem.price;}, 0);
-  
-    return total;
-  }
-  
-  const chargeIt = (ccNum) => {
-    if (ccNum === "") {
-      $('#error-message').html("Please enter a credit card number");
-    } else {
-      emptyCart();
-      $(".modal-backdrop").remove();
-      $("#buy-modal").modal("hide");
-  
-      $("#cart").html(
-        `<h2 style="margin-top: 100px;">Thank you for your order.</h2>
-        <p>Your credit card number was ${ccNum} has been charged.</p>`
-      )
-    }
-  }
+    );
+  });
+};
 
-  export { makeCart, addToCart }
+const cartTotal = () => {
+  const myCart = getCart();
+  const total = myCart.reduce((a, cartItem) => {
+    return a + cartItem.price;
+  }, 0);
+
+  return total;
+};
+
+const chargeIt = (ccNum) => {
+  if (ccNum === "") {
+    $("#error-message").html("Please enter a credit card number");
+  } else {
+    emptyCart();
+    $(".modal-backdrop").remove();
+    $("#buy-modal").modal("hide");
+
+    $("#cart").html(
+      `<h2 style="margin-top: 100px;">Thank you for your order.</h2>
+        <p>Your credit card number was ${ccNum} has been charged.</p>`
+    );
+  }
+};
+
+export { makeCart, addToCart }

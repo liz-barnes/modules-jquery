@@ -1,20 +1,20 @@
 import { addToCart } from './cart.js';
 
 const makeStore = (array, titles = false) => {
-    $("#store").html("");
-    array.forEach((item, index) => {
-      switch(titles) {
-        case true:
-          $("#store").removeClass('card-columns')
-          $("#store").append(`<div>${item.title} | ${item.price}</div>`)
-          break;
-        default:
-          $("#store").addClass("card-columns");
-          $("#store").append(
-            `<div class="card">
+  $("#store").html("");
+  array.forEach((item, index) => {
+    switch (titles) {
+      case true:
+        $("#store").removeClass("card-columns");
+        $("#store").append(`<div>${item.title} | ${item.price}</div>`);
+        break;
+      default:
+        $("#store").addClass("card-columns");
+        $("#store").append(
+          `<div class="card">
                   <img class="card-img-top" src=${item.image} alt=${
-              item.title
-            } style="height: 400px;">
+            item.title
+          } style="height: 400px;">
                   <div class="card-body" style="height: 200px;">
                     <div class="sale-badge">${
                       item.featured
@@ -26,15 +26,15 @@ const makeStore = (array, titles = false) => {
                     <button class="btn btn-danger" id="cart-add-${index}">Add to Cart</button>
                   </div>
                 </div>`
-          );
-      }
-      addToCart(array, index);
-    });
-  };
+        );
+    }
+    addToCart(array, index);
+  });
+};
 
-  const emptyStore = () => {
-    $("#store").removeClass('card-columns');
-    $('#store').html("<h1>No Items with that title.</h1>");
-  }
+const emptyStore = () => {
+  $("#store").removeClass("card-columns");
+  $("#store").html("<h1>No Items with that title.</h1>");
+};
 
-  export { makeStore, emptyStore }
+export { makeStore, emptyStore }

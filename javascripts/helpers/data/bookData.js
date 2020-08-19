@@ -36,29 +36,29 @@ const bookInfo = [
       featured: false,
     },
   ];
-
+  
   const featured = bookInfo.filter((book) => {
     return book.featured;
   });
   
   const titles = bookInfo.map((book) => {
-    return { title: book.title, price: book.price};
-  })
-
+    return { title: book.title, price: book.price };
+  });
+  
   const getBooks = (type) => {
-    switch(type) {
-        case 'all':
-            return bookInfo;
-            break;
-        case 'featured':
-            return featured;
-            break;
-        case 'titles':
-            return titles;
-            break;
-        default:
-            return;
-    }
+      switch(type) {
+          case 'all':
+              return bookInfo;
+              break;
+          case 'featured':
+              return featured;
+              break;
+          case 'titles':
+              return titles;
+              break;
+          default:
+              return;
+      }
   }
-
-//   export { getBook }
+  
+  export { getBooks }
