@@ -1,4 +1,5 @@
 import { setCart, getCart, emptyCart } from './../helpers/data/cartData.js';
+import { cartTotal } from './../components/cartTotal.js'
 
 
 const makeCart = () => {
@@ -84,15 +85,6 @@ const showCartItems = () => {
         </tr>`
     );
   });
-};
-
-const cartTotal = () => {
-  const myCart = getCart();
-  const total = myCart.reduce((a, cartItem) => {
-    return a + cartItem.price;
-  }, 0);
-
-  return total;
 };
 
 const chargeIt = (ccNum) => {
