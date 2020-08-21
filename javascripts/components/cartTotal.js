@@ -1,3 +1,5 @@
+import { getCart } from './helpers/data/cartData.js';
+
 const cartTotal = () => {
     const myCart = getCart();
     const total = myCart.reduce((a, cartItem) => {
@@ -7,4 +9,4 @@ const cartTotal = () => {
     return total;
   };
 
-  export { cartTotal }
+  export { cartTotal };
