@@ -1,4 +1,4 @@
-import { getCart } from './helpers/data/cartData.js';
+import { getCart } from './../helpers/data/cartData.js';
 
 const cartTotal = () => {
     const myCart = getCart();
